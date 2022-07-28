@@ -13,13 +13,7 @@ class WindowNow {
     create(config, page, functionComplete){
 
         let conf = config;
-        this._funcComplete = functionComplete;
-
-        conf.webPreferences = {
-            nodeIntegration: true,
-            contextIsolation: false,
-            nodeIntegrationInWorker: true
-        }
+        this._funcComplete = functionComplete;        
 
         this._mainWindow = new BrowserWindow( conf ); 
 
@@ -31,8 +25,15 @@ class WindowNow {
 
         nativeTheme.themeSource = this._nativeTheme;
 
+        this._mainWindow.webContents.openDevTools();
+
         return this._mainWindow;
-    }    
+    } 
+
+    send(a,b){
+        console.log(a)
+    }
+    
 }
 
 module.exports = WindowNow;

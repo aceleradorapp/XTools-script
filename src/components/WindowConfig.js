@@ -1,7 +1,12 @@
 
 var configHome = {
     width: 1200,
-    height:800,      
+    height:800,     
+    webPreferences: {
+        nodeIntegration: true,
+        contextIsolation: false,
+        nodeIntegrationInWorker: true
+    }, 
     backgroundColor: null,        
     frame: true,
     show: false,
