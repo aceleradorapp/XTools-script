@@ -58,8 +58,24 @@ async function openFile(){
     file.pathVideo = data.pathVideo,
     file.nameVideo = data.nameVideo
           
-    
+    openFileData(dialogFile);
+
     return file;
+}
+
+function openFileData(dialogFile){
+    
+    let data = JSON.parse(readFile(dialogFile.filePaths[0]));          
+   
+    file.type = 'abrir',
+    file.name = path.basename(dialogFile.filePaths[0]),
+    file.data = data.data,
+    file.saved =  true,
+    file.update = true,
+    file.path =  dialogFile.filePaths[0],
+    file.urlVideo = data.pathVideo +'\\'+ data.nameVideo,//data.urlVideo,
+    file.pathVideo = data.pathVideo,
+    file.nameVideo = data.nameVideo
 }
 
 function readFile(filePath){ 
@@ -71,10 +87,7 @@ function readFile(filePath){
     }
 }
 
-
-
 module.exports = {
     file,
-    openFile,
-    newFile
+    openFile
 }

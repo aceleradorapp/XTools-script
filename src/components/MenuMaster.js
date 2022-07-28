@@ -35,63 +35,31 @@ function setMenuObject(menuObject){
 const menuObj = [
                 {            
                     label:'Arquivo',
-                    submenu:[
+                    submenu:[                        
                         {
                             id:1,
-                            label:'Novo',
-                            enabled: true,
-                            click(){
-                                clickMenuHandler('novo');
-                            }
-                        },
-                        {
-                            id:2,
                             label:'Abrir',
                             enabled: true,
                             click(){
                                 clickMenuHandler('abrir');
                             }
-                        },
-                        {
-                            id:3,
-                            label:'Salvar',
-                            enabled: false,
-                            click(){
-                                clickMenuHandler('salvar');
-                            }
-                        },
-                        {
-                            id:4,
-                            label:'Salvar como',
-                            enabled: false,
-                            click(){
-                                clickMenuHandler('salvar-como');
-                            }
-                        },
+                        },                        
                         { 
                             type: 'separator' 
                         },
                         {
-                            id:5,
+                            id:2,
                             label:'Exportar legenda',
                             enabled: false,
                             click(){
                                 clickMenuHandler('exportar-legenda');
                             }
-                        },
-                        {
-                            id:6,
-                            label:'Importar legenda',
-                            enabled: false,
-                            click(){
-                                clickMenuHandler('imortar-legenda');
-                            }
-                        },
+                        },                        
                         { 
                             type: 'separator' 
                         },
                         {
-                            id:7,
+                            id:3,
                             label:'Compilar dados',
                             enabled: false,
                             click(){

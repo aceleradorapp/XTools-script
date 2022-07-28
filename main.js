@@ -4,7 +4,7 @@ const WindowNow = require('./src/components/WindowNow');
 // const path = require('path');
 const { configHome } = require('./src/components/WindowConfig');
 const { menu } = require('./src/components/MenuMaster');
-var { file, newFile, openFile } = require('./src/components/Storage');
+var { file, newFile, openFile, saveAsFileHandler } = require('./src/components/Storage');
 
 var windowNow = new WindowNow('src/pages/','dark');
 var myhome = null;
@@ -17,9 +17,7 @@ app.whenReady().then(homeWindow.bind(this));
  * recebe os eventos de clique com os dados menu selecionado
  */
 menu.create((action)=>{
-    if(action == 'novo'){
-        createNewFile();
-    }else if(action == 'abrir'){
+    if(action == 'abrir'){
         openFileHandler();
     }
 });
@@ -45,10 +43,6 @@ function homeWindow(){
 }
 
 /********************************************************* */
-
-function createNewFile(){
-    myhome.webContents.send('set-file',file);   
-}
 
 async function openFileHandler(){        
     await openFile()
