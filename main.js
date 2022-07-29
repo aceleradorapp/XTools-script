@@ -1,7 +1,5 @@
-const { app, dialog } = require('electron');
 const WindowNow = require('./src/components/WindowNow');
-// const fs = require('fs');
-// const path = require('path');
+const { app } = require('electron');
 const { configHome } = require('./src/components/WindowConfig');
 const { menu } = require('./src/components/MenuMaster');
 var { file, newFile, openFile, saveAsFileHandler } = require('./src/components/Storage');
@@ -45,7 +43,7 @@ function homeWindow(){
 /********************************************************* */
 
 async function openFileHandler(){        
-    await openFile()
+    await openFile();    
     myhome.webContents.send('set-file', file);
 }
 

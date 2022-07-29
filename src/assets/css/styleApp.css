@@ -3,6 +3,7 @@ html, body{
     height: 100%;
     margin: 0;
     padding: 0;
+    background-color: #000;
 }
 
 *{
@@ -115,7 +116,7 @@ html, body{
 .container{
     width: 100%;
     height: 100%;
-    background-color: #000;    
+    /* background-color: rgb(92, 90, 216);     */
 }
 
 .gradient{
