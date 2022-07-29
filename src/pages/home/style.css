@@ -28,10 +28,18 @@
 }
 
 .control-frame{
-    height: 100%;
-    width: 235px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 75%;
+    width: 290px;
+    max-width: 162px;
+    min-width: 162px;
     margin: 0 10px;
-    background-color: blueviolet;
+    color: #fff;
+    background-color: #ffffff12;
+    border: solid 2px #ffffff0a;
+    border-radius: 10px;
 }
 
 .name-tool{
