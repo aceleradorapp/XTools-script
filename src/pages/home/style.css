@@ -1,3 +1,16 @@
+html, body{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #000;
+}
+
+*{
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
 .conteiner-owner{
     width: 100%;
     height: 100%;
@@ -18,7 +31,7 @@
 
 .container-frame{
     width: 100%;
-    height: 8%;
+    height: 10%;
     border: solid 2px #ffffff1f;
     border-radius: 10px;
     padding: 0 20px 0 0;
@@ -32,9 +45,9 @@
     align-items: center;
     justify-content: space-around;
     height: 75%;
-    width: 290px;
-    max-width: 162px;
-    min-width: 162px;
+    width: 280px;
+    max-width: 180px;
+    min-width: 180px;
     margin: 0 10px;
     color: #fff;
     background-color: #ffffff12;
@@ -90,5 +103,6 @@
 }
 
 .script{
-    color: #fff;
+    color: #afafaf;    
+    font-size: 16px;
 }

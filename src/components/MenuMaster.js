@@ -89,10 +89,10 @@ const menuObj = [
                         },
                         {
                             id:12,
-                            label:'Legendas',
+                            label:'Roteiro',
                             enabled: false, 
                             click(){
-                                clickMenuHandler('legendas');
+                                clickMenuHandler('roteiro');
                             }                                      
                         }
                     ]

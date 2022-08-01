@@ -1,3 +1,11 @@
+/* REFERENCIA PATH
+const notes = '/users/joe/notes.txt';
+
+path.dirname(notes); // /users/joe
+path.basename(notes); // notes.txt
+path.extname(notes); // .txt
+*/
+
 const { app, dialog } = require('electron');
 const fs = require('fs');
 const path = require('path');
@@ -46,17 +54,17 @@ async function openFile(){
         return;
     }
 
-    let data = JSON.parse(readFile(dialogFile.filePaths[0]));          
+    // let data = JSON.parse(readFile(dialogFile.filePaths[0]));          
    
-    file.type = 'abrir',
-    file.name = path.basename(dialogFile.filePaths[0]),
-    file.data = data.data,
-    file.saved =  true,
-    file.update = true,
-    file.path =  dialogFile.filePaths[0],
-    file.urlVideo = data.pathVideo +'\\'+ data.nameVideo,//data.urlVideo,
-    file.pathVideo = data.pathVideo,
-    file.nameVideo = data.nameVideo
+    // file.type = 'abrir',
+    // file.name = path.basename(dialogFile.filePaths[0]),
+    // file.data = data.data,
+    // file.saved =  true,
+    // file.update = true,
+    // file.path =  dialogFile.filePaths[0],
+    // file.urlVideo = path.dirname(dialogFile.filePaths[0]) +'\\'+ data.nameVideo,
+    // file.pathVideo = data.pathVideo,
+    // file.nameVideo = data.nameVideo
           
     openFileData(dialogFile);
 
@@ -67,15 +75,14 @@ function openFileData(dialogFile){
     
     let data = JSON.parse(readFile(dialogFile.filePaths[0]));          
    
-    file.type = 'abrir',
-    file.name = path.basename(dialogFile.filePaths[0]),
-    file.data = data.data,
-    file.saved =  true,
-    file.update = true,
-    file.path =  dialogFile.filePaths[0],
-    file.urlVideo = data.pathVideo +'\\'+ data.nameVideo,//data.urlVideo,
-    file.pathVideo = data.pathVideo,
-    file.nameVideo = data.nameVideo
+    file.type = 'abrir';
+    file.data = data.data;
+    file.saved =  true;
+    file.update = true;
+    file.path =  dialogFile.filePaths[0];
+    file.urlVideo = path.dirname(dialogFile.filePaths[0]) +'\\'+ data.nameVideo;
+    file.pathVideo = data.pathVideo;
+    file.nameVideo = data.nameVideo;
 }
 
 function readFile(filePath){ 

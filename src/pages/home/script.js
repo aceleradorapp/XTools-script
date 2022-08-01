@@ -14,6 +14,10 @@ var update = null;
 var videoControl = new VideoControl(videoElement);
 var legends = new Legends(videoControl);
 
+legends.addEventLegendSelected((e)=>{
+    ipcRenderer.send('legend-selected', e);
+});
+
 ipcRenderer.on('set-file', (event, data)=>{
     file = data;
     legends.loadData(file.data);
@@ -32,6 +36,10 @@ function removeLogin(){
 function loadVideo(url){    
     videoControl.load(url);
     videoControl.eventsReturn((e)=>{
-        console.log(e);
+        if(e.typeEvent== 'video-loaded'){
+            legends.start();
+        }
+        console.log(e.target.currentTime);
     });
 }
+
