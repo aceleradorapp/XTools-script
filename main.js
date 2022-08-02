@@ -4,7 +4,7 @@ const { configHome, configmanuScript } = require('./src/components/WindowConfig'
 const { menu } = require('./src/components/MenuMaster');
 var { file, openFile } = require('./src/components/Storage');
 
-var windowNow = new WindowNow('src/pages/','dark');
+var windowNow = new WindowNow('src/pages/','light');
 var myhome = null;
 var myManuScript = null;
 
@@ -18,7 +18,7 @@ app.whenReady().then(homeWindow.bind(this));
 menu.create((action)=>{
     if(action == 'abrir'){
         openFileHandler();
-    }else if(action == 'roteiro'){
+    }else if(action == 'roteiro'){       
         manuscriptWindow();
     }
 });
@@ -26,7 +26,6 @@ menu.create((action)=>{
 menu.block('all', false);
 menu.block('Abrir', true);
 menu.block('Fechar', true);
-menu.block('Roteiro', true);
 
 
 /**
@@ -36,7 +35,7 @@ menu.block('Roteiro', true);
 function homeWindow(){
     
     myhome = windowNow.create(configHome, 'home',(e)=>{        
-        e.show();                   
+        e.show();                           
     }); 
 
     myhome.on('closed', ()=>{        
@@ -54,17 +53,17 @@ function homeWindow(){
  * as configurações da janela está no aquivo WindowConfig
  */
  function manuscriptWindow(){
-    
+   
     myManuScript = windowNow.create(configmanuScript, 'manuscript',(e)=>{        
-        e.show();                   
+        e.show();          
+        myManuScript.webContents.send('set-file', file);
+        menu.block('Roteiro', false);                         
     }); 
 
     myManuScript.on('closed', ()=>{        
         myManuScript = null;
+        menu.block('Roteiro', true);
     });
-
-    myManuScript.webContents.send('set-file', file);
- 
 }
 
 /********************************************************* */
@@ -72,6 +71,7 @@ function homeWindow(){
 async function openFileHandler(){        
     await openFile();    
     myhome.webContents.send('set-file', file);
+    menu.block('Roteiro', true);
 }
 
 /********************************************************* */

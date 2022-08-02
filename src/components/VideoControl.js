@@ -33,7 +33,7 @@ class VideoControl {
 
         this.stopDrawFrame();
         
-        if(this._dataTrack.videoInit == this._dataTrack.videoFinal){
+        if(this._dataTrack.videoInit == this._dataTrack.videoFinal || this._dataTrack.type == 'screen'){
             this._funcitonReturnTrack('block');
             return;
         }    
@@ -52,7 +52,7 @@ class VideoControl {
             this.setPositionVideo(this._dataTrack.videoInit);
             this._videoElement.play();
 
-            this.reqAnimationId = requestAnimationFrame(this.drawFrame.bind(this))            
+            this.reqAnimationId = requestAnimationFrame(this.drawFrame.bind(this));            
         }
     }
 
@@ -149,8 +149,7 @@ class VideoControl {
     drawFrame () {
         
         if(this._videoElement.currentTime >= this._dataTrack.videoFinal){     
-            this.tracked = false;       
-            this._videoElement.pause();
+            this.tracked = false;                  
             this.setPositionVideo(this._dataTrack.videoFinal);
             this.stopDrawFrame();
             return;            
@@ -160,6 +159,7 @@ class VideoControl {
     };
 
     stopDrawFrame(){
+        this._videoElement.pause();
         if(this.reqAnimationId){
             window.cancelAnimationFrame(this.reqAnimationId);
             this._funcitonReturnTrack('complete');

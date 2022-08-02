@@ -19,9 +19,37 @@ html, body{
 }
 
 .tools{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     width: 100%;
-    height: 70px;
+    height: 33px;
+    padding: 0 38px;
     background-color: #d9d9d9;
+}
+
+.item-tool-left{
+    display: flex;
+}
+
+.bt-tool{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 30px;
+    margin: 1px 1px 1px;
+    border: solid 1px #f3f3f3;
+    /* border-radius: 5px; */
+    background-color: #ffffffeb;
+    color: #a1a0a0;
+    cursor: pointer;
+}
+
+.bt-tool:hover{    
+    border: solid 2px #e7e7e7a8;
+    background-color: #ededed;
+    color: #a1a0a0;
 }
 
 .content{
@@ -33,10 +61,17 @@ html, body{
 }
 
 .footer{
+    display: flex;
+    align-items: center;
     width: 100%;
     height: 30px;
-    background-color: chocolate;
+    padding: 0 20px;
     background-color: #d9d9d9;
+}
+
+.item-footer{
+    font-size: 15px;
+    color: #747474;
 }
 
 .page{
@@ -66,6 +101,7 @@ html, body{
 .page .items img{
     height: 100%;
     opacity: 0.6;
+    border-radius: 10px;
 }
 
 .objective{
@@ -75,6 +111,7 @@ html, body{
 }
 
 .frame{
+    position: relative;
     display: flex;
     margin: 10px;    
     border: solid 1px #e9e9e9;
@@ -87,6 +124,40 @@ html, body{
     border-radius: 5px;
 }
 
+.frame:hover .buttons-config{
+    display: flex;
+    flex-direction: column;
+}
+
+.buttons-config{
+    position: absolute;
+    display: none;
+    top: 5px;
+    left: -47px;
+}
+
+.btn-config{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 28px;
+    border: solid 1px #00000014;
+    border-radius: 5px;
+    background-color: #fbfbfb;
+    color: #8f8f8f;
+    margin: 0 3px;
+    cursor: pointer;
+
+    -webkit-box-shadow: 3px 3px 6px 0px rgba(0,0,0,0.87); 
+    box-shadow: 3px 3px 6px 0px rgba(0,0,0,0.87);
+}
+
+.btn-config:hover{
+    border: solid 1px #00000014;
+    background-color: #e5e4e4;
+    color: #8f8f8f;
+}
 .number{
     width: 60px;
     min-width: 60px;
@@ -116,3 +187,4 @@ html, body{
     font-size: 22px;
     color: #a3a3a3;
 }
+

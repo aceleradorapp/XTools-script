@@ -52,19 +52,7 @@ async function openFile(){
 
     if(dialogFile.canceled == true){
         return;
-    }
-
-    // let data = JSON.parse(readFile(dialogFile.filePaths[0]));          
-   
-    // file.type = 'abrir',
-    // file.name = path.basename(dialogFile.filePaths[0]),
-    // file.data = data.data,
-    // file.saved =  true,
-    // file.update = true,
-    // file.path =  dialogFile.filePaths[0],
-    // file.urlVideo = path.dirname(dialogFile.filePaths[0]) +'\\'+ data.nameVideo,
-    // file.pathVideo = data.pathVideo,
-    // file.nameVideo = data.nameVideo
+    }    
           
     openFileData(dialogFile);
 
@@ -76,6 +64,7 @@ function openFileData(dialogFile){
     let data = JSON.parse(readFile(dialogFile.filePaths[0]));          
    
     file.type = 'abrir';
+    file.name = path.basename(dialogFile.filePaths[0]),
     file.data = data.data;
     file.saved =  true;
     file.update = true;

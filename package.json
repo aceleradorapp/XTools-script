@@ -6,11 +6,11 @@
   "scripts": {
     "start": "electron .",
     "build": "npx electron-packager . --out=packages --icon=src/assets/image/icon/Xtools-ico-nano.ico --overwrite",
-    "electron": "ELECTRON_DISABLE_SECURITY_WARNINGS=true electron ."    
+    "electron": "ELECTRON_DISABLE_SECURITY_WARNINGS=true electron ."
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^19.0.10"
+    "electron": "^20.0.0"
   }
 }
