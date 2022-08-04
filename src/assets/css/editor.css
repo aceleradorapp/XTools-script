@@ -1,0 +1,106 @@
+.containerEditor {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    background-color: #000000b3;
+    position: fixed;
+    z-index: 2000;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.containerEditor h1 {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    text-align: center;
+    padding: 20px 0;
+    color: dimgray;
+}
+
+.actions {
+    width: 100%;
+    height: 40px;
+    position: fixed;
+    text-align: center;
+    margin-top: 10px;
+    z-index: 2010;
+    top: 14vw;
+}
+
+.btn-color-editor{
+    background-color: #fff !important;
+    color: #000 !important;
+}
+
+#save {
+    background-color: #fff;
+    padding: 10px 20px;
+    border: 1px solid #999;
+    font-size: 4em;
+}
+
+.cd-toolbar {
+    box-sizing: border-box;
+    width: 60%;
+    min-height: 40px;
+    border: 1px solid #999;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    list-style: none;
+    margin: 0;
+    padding: 5px 10px;
+    background-color: #ddd;
+}
+
+.cd-toolbar li {
+    margin: 0;
+    padding: 5px 0;
+    display: inline-block;
+}
+
+.cd-toolbar button {
+    height: 20px;
+    width: 20px;
+    background-color: #fff;
+    border: 1px solid #999;
+}
+
+.cd-toolbar select {
+    height: 20px;
+    min-width: 40px;
+    background-color: #fff;
+    border: 1px solid #999;
+}
+
+.cd-toolbar li.space {
+    content: '/';
+    width: 5px;
+    margin-left: 5px;
+    border-left: 1px solid #999;
+}
+
+#color {
+    width: 80px;
+}
+#color option span {
+    width: 80px;
+    content: '&nbsp';
+    border: 1px solid #999;
+}
+
+.cd-editor {
+    background-color: #fff;
+    box-sizing: border-box;
+    width: 60%;
+    min-height: 250px;
+    margin: 0;
+    padding: 10px;
+    border: 0;
+    display: block;
+    overflow: auto;
+    border: 1px solid #999;
+    border-top: none;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+}

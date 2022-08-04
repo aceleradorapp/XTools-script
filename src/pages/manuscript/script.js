@@ -1,4 +1,5 @@
 const { ipcRenderer  } = require('electron');
+const {CDEditor} = require("../../components/Editor");
 
 const titleElement = document.getElementById('title');
 const containerFramesElement = document.getElementById('containerFrames');
@@ -16,8 +17,6 @@ btnPointerElement.onclick = onclickButtonsHandler;
 btnPlayAutoElement.onclick = onclickButtonsHandler;
 btnAudioEnableElement.onclick = onclickButtonsHandler;
 
-
-
 ipcRenderer.on('set-file', (event, data)=>{
     file = data;
     update = data.update?'':'*';     
@@ -30,6 +29,8 @@ ipcRenderer.on('set-file', (event, data)=>{
     drawScript();  
     
     selectLegends({id:1});
+   
+
 });
 
 ipcRenderer.on('legend-selected', (event, data)=>{
@@ -126,10 +127,30 @@ function onclickButtonsHandler(e){
 }
 
 function onclickButtonFrameAction(e){
-    let idFrame = e.currentTarget.getAttribute('data-idFrame');
+    let idFrame = parseInt(e.currentTarget.getAttribute('data-idFrame'));
     let type = e.currentTarget.getAttribute('data-type');
-    let frameElent = framesElements[idFrame];
+    
+    editText(idFrame);    
+}
 
-    console.log(type);
+function editText(idFrame){
+    var editor = new CDEditor('editBox',file.data[idFrame].text);
+    const btSalveElement = document.getElementById('btSalve');
+    const btCancelElement = document.getElementById('btCancel');
+    
+    btSalveElement.onclick = ()=>{
+        var text = editor.save();
+        file.data[idFrame].textOld = file.data[idFrame].text;
+        file.data[idFrame].text = text;
+
+        drawScript();
+
+        console.log(text);
+    }
+
+    btCancelElement.onclick = ()=>{
+        editor.cancel();
+        editor = null;
+    }
 }
 
