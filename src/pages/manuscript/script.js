@@ -13,6 +13,9 @@ var file = null;
 var update = null;
 var framesElements = null;
 
+var invertTextPosition = 1;
+var modeSelectFrame = false;
+
 btnPointerElement.onclick = onclickButtonsHandler;
 btnPlayAutoElement.onclick = onclickButtonsHandler;
 btnAudioEnableElement.onclick = onclickButtonsHandler;
@@ -37,6 +40,14 @@ ipcRenderer.on('legend-selected', (event, data)=>{
     selectLegends(data);
 });
 
+function updateFile(){
+    ipcRenderer.send('update-file', file);
+}
+
+function sendPositionLegend(id){
+    ipcRenderer.send('send-position-legend', {idLegend:id});
+}
+
 function drawScript(){
     var tags = '';
 
@@ -47,7 +58,7 @@ function drawScript(){
     containerFramesElement.innerHTML = tags;
 
     
-    let btnFrames = document.getElementsByClassName('btn-config');
+    let btnFrames = document.getElementsByClassName('btn-config-frame');
     for (var index in btnFrames) {
         btnFrames[index].onclick = onclickButtonFrameAction;
     }
@@ -57,14 +68,18 @@ function createTagsFrames(data){
     var tag = '';
     data.info == null? data.info = '': data.info;
 
+    var btInvert = '';
+    if(data.textOld){
+        var btInvert = '<button class="btn-config-frame btn-menu btn-color-frame" data-name="btnFrame" data-type="invert" data-idFrame="'+(data.id-1)+'"><i class="fa-solid fa-arrows-rotate"></i></button>' 
+    }
     
     tag +='<div class="frame" data-id-legend = "'+data.id+'">';
     tag +='     <div class="buttons-config">';
-    tag +='         <div class="btn-config" data-name="btnFrame" data-type="edit" data-idFrame="'+(data.id-1)+'"><i class="fa-solid fa-pen-to-square"></i></div>';
-    tag +='         <div class="btn-config" data-name="btnFrame" data-type="send" data-idFrame="'+(data.id-1)+'"><i class="fa-solid fa-share-from-square"></i></div>';
-    tag +='         <div class="btn-config" data-name="btnFrame" data-type="invert" data-idFrame="'+(data.id-1)+'"><i class="fa-solid fa-shuffle"></i></div>';
+    tag +='         <div class="btn-config btn-config-frame" data-name="btnFrame" data-type="edit" data-idFrame="'+(data.id-1)+'"><i class="fa-solid fa-pen-to-square"></i></div>';
+    tag +='         <div class="btn-config btn-config-frame" data-name="btnFrame" data-type="send" data-idFrame="'+(data.id-1)+'"><i class="fa-solid fa-message"></i></div>';
+    tag +='         <div class="btn-config btn-config-frame hide" data-name="btnFrame" data-type="invert" data-idFrame="'+(data.id-1)+'"><i class="fa-solid fa-shuffle"></i></div>';
     tag +='     </div>';
-    tag +='    <div class="number">'+data.id+'.</div>';
+    tag +='    <div class="number">'+data.id+'.'+btInvert+'</div>';
     tag +='    <div class="text">';
     tag +=          data.text;
     tag +='    </div>';
@@ -82,7 +97,8 @@ function selectLegends(data){
 
     for(var i=0; i < framesElements.length; i++){
         var element = framesElements[i];
-        element.classList.remove('frame-selected');                
+        element.classList.remove('frame-selected'); 
+        element.onclick = clickFrameHandler;               
 
         if(element.getAttribute("data-id-legend") == data.id){
             element.classList.add('frame-selected');
@@ -112,13 +128,30 @@ function selectLegends(data){
     }
 }
 
+function clickFrameHandler(e){
+    let idElement = e.target.parentElement.getAttribute("data-id-legend");
+
+    if(modeSelectFrame){
+        sendPositionLegend({idLegend:idElement});
+    }    
+}
+
 function onclickButtonsHandler(e){
     let dataButton = {
-        action: e.target.getAttribute('data-name'),        
+        action: e.currentTarget.getAttribute('data-name'),        
     }
 
-    if(dataButton.action == 'pointer'){
+    let buttonElement = e.currentTarget;
 
+    if(dataButton.action == 'pointer'){
+        modeSelectFrame = !modeSelectFrame;
+        if(modeSelectFrame){
+            buttonElement.classList.add('btn-selected');
+            addClickFrame();
+        }else{
+            buttonElement.classList.remove('btn-selected');
+            removeClickFrame()
+        }
     }else if(dataButton.action == 'playAuto'){
 
     }else if(dataButton.action == 'audioEnable'){
@@ -127,10 +160,24 @@ function onclickButtonsHandler(e){
 }
 
 function onclickButtonFrameAction(e){
-    let idFrame = parseInt(e.currentTarget.getAttribute('data-idFrame'));
-    let type = e.currentTarget.getAttribute('data-type');
+    let option={
+        top:contentFrameElement.scrollTop,
+        left:0,
+        behavior:'smooth'
+    }
     
-    editText(idFrame);    
+    let idFrame = parseInt(e.currentTarget.getAttribute('data-idFrame'));
+    let type = e.currentTarget.getAttribute('data-type');    
+
+    if(type=='edit'){
+        editText(idFrame);
+    }else if(type=='send'){
+        
+    }else if(type=='invert'){
+        invertText(idFrame);
+    }            
+
+    contentFrameElement.scrollTo(option);     
 }
 
 function editText(idFrame){
@@ -143,14 +190,52 @@ function editText(idFrame){
         file.data[idFrame].textOld = file.data[idFrame].text;
         file.data[idFrame].text = text;
 
-        drawScript();
+        drawScript(); 
+        selectLegends(file.data[idFrame]);  
 
-        console.log(text);
+        updateFile();
     }
 
     btCancelElement.onclick = ()=>{
         editor.cancel();
         editor = null;
+    }
+}
+
+function invertText(idFrame){
+    if(!file.data[idFrame].textOld){
+        return;
+    }
+
+    if(invertTextPosition == 1){
+        invertTextPosition = 2
+        file.data[idFrame].textOldTemp = file.data[idFrame].text;
+        file.data[idFrame].text = file.data[idFrame].textOld;
+    }else{
+        invertTextPosition = 1
+        file.data[idFrame].text = file.data[idFrame].textOldTemp;
+        file.data[idFrame].textOldTemp = null;
+    }
+
+    drawScript(); 
+    selectLegends(file.data[idFrame]);
+}
+
+function addClickFrame(){
+    framesElements = document.getElementsByClassName('frame');
+
+    for(var i=0; i < framesElements.length; i++){
+        var element = framesElements[i];
+        element.classList.add('framePoionter');     
+    }
+}
+
+function removeClickFrame(){
+    framesElements = document.getElementsByClassName('frame');
+
+    for(var i=0; i < framesElements.length; i++){
+        var element = framesElements[i];
+        element.classList.add('framePoionter');     
     }
 }
 

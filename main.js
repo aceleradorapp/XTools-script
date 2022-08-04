@@ -82,3 +82,11 @@ ipcMain.on('legend-selected', (event, data)=>{
     }             
 });
 
+ipcMain.on('update-file', (event, data)=>{
+    file = data;    
+});
+
+ipcMain.on('send-position-legend', (event, data)=>{
+    console.log(data.idLegend);   
+});
+
