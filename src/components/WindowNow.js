@@ -11,7 +11,8 @@ class WindowNow {
     }    
 
     create(config, page, functionComplete){
-
+        
+        console.log(config.icon);
         let conf = config;
         this._funcComplete = functionComplete;        
 
@@ -25,7 +26,7 @@ class WindowNow {
 
         nativeTheme.themeSource = this._nativeTheme;
 
-        this._mainWindow.webContents.openDevTools();
+        //this._mainWindow.webContents.openDevTools();
 
         return this._mainWindow;
     } 

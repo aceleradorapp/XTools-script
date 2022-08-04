@@ -1,3 +1,4 @@
+const path = require('path');
 
 var configHome = {
     width: 1200,
@@ -10,7 +11,7 @@ var configHome = {
     backgroundColor: null,        
     frame: true,
     show: false,
-    icon: __dirname+'/src/assets/image/icons/Xtools-ico-nano.png',
+    icon: path.join(__dirname, '../assets/image/icons/Xtools-ico-script.png'), 
     darkTheme: true
 }
 
@@ -26,7 +27,7 @@ var configmanuScript = {
     backgroundColor: null,        
     frame: true,
     show: false,
-    icon: __dirname+'/src/assets/image/icons/Xtools-ico-nano.png',
+    icon: path.join(__dirname, '../assets/image/icons/Xtools-ico-script.png'),
     darkTheme: true
 }
 
