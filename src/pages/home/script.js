@@ -38,8 +38,7 @@ function loadVideo(url){
     videoControl.eventsReturn((e)=>{
         if(e.typeEvent== 'video-loaded'){
             legends.start();
-        }
-        console.log(e.target.currentTime);
+        }        
     });
 }
 

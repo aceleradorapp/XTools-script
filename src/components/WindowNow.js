@@ -10,7 +10,7 @@ class WindowNow {
         this._funcComplete = null;        
     }    
 
-    create(config, page, functionComplete){
+    create(config, page, functionComplete, devTools=false){
         
         console.log(config.icon);
         let conf = config;
@@ -26,7 +26,9 @@ class WindowNow {
 
         nativeTheme.themeSource = this._nativeTheme;
 
-        //this._mainWindow.webContents.openDevTools();
+        if(devTools){
+            this._mainWindow.webContents.openDevTools();
+        }
 
         return this._mainWindow;
     } 

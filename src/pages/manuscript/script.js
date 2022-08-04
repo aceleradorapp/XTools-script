@@ -4,9 +4,19 @@ const titleElement = document.getElementById('title');
 const containerFramesElement = document.getElementById('containerFrames');
 const totalFramesElement = document.getElementById('totalFrames');
 const contentFrameElement = document.getElementById('contentFrame');
+const btnPointerElement = document.getElementById('btnPointer');
+const btnPlayAutoElement = document.getElementById('btnPlayAuto');
+const btnAudioEnableElement = document.getElementById('btnAudioEnable');
 
 var file = null;
 var update = null;
+var framesElements = null;
+
+btnPointerElement.onclick = onclickButtonsHandler;
+btnPlayAutoElement.onclick = onclickButtonsHandler;
+btnAudioEnableElement.onclick = onclickButtonsHandler;
+
+
 
 ipcRenderer.on('set-file', (event, data)=>{
     file = data;
@@ -30,11 +40,16 @@ function drawScript(){
     var tags = '';
 
     for(var i = 0; i < file.data.length; i++){ 
-
         tags += createTagsFrames(file.data[i]);
     }
 
     containerFramesElement.innerHTML = tags;
+
+    
+    let btnFrames = document.getElementsByClassName('btn-config');
+    for (var index in btnFrames) {
+        btnFrames[index].onclick = onclickButtonFrameAction;
+    }
 }
 
 function createTagsFrames(data){    
@@ -44,9 +59,9 @@ function createTagsFrames(data){
     
     tag +='<div class="frame" data-id-legend = "'+data.id+'">';
     tag +='     <div class="buttons-config">';
-    tag +='         <div class="btn-config"><i class="fa-solid fa-pen-to-square"></i></div>';
-    tag +='         <div class="btn-config"><i class="fa-solid fa-share-from-square"></i></div>';
-    tag +='         <div class="btn-config"><i class="fa-solid fa-shuffle"></i></div>';
+    tag +='         <div class="btn-config" data-name="btnFrame" data-type="edit" data-idFrame="'+(data.id-1)+'"><i class="fa-solid fa-pen-to-square"></i></div>';
+    tag +='         <div class="btn-config" data-name="btnFrame" data-type="send" data-idFrame="'+(data.id-1)+'"><i class="fa-solid fa-share-from-square"></i></div>';
+    tag +='         <div class="btn-config" data-name="btnFrame" data-type="invert" data-idFrame="'+(data.id-1)+'"><i class="fa-solid fa-shuffle"></i></div>';
     tag +='     </div>';
     tag +='    <div class="number">'+data.id+'.</div>';
     tag +='    <div class="text">';
@@ -61,12 +76,12 @@ function createTagsFrames(data){
 }
 
 function selectLegends(data){
-    var frames = document.getElementsByClassName('frame');
     var elementSelected = null;
+    framesElements = document.getElementsByClassName('frame');
 
-    for(var i=0; i < frames.length; i++){
-        var element = frames[i];
-        element.classList.remove('frame-selected');
+    for(var i=0; i < framesElements.length; i++){
+        var element = framesElements[i];
+        element.classList.remove('frame-selected');                
 
         if(element.getAttribute("data-id-legend") == data.id){
             element.classList.add('frame-selected');
@@ -94,5 +109,27 @@ function selectLegends(data){
         }
         contentFrameElement.scrollTo(option);
     }
+}
+
+function onclickButtonsHandler(e){
+    let dataButton = {
+        action: e.target.getAttribute('data-name'),        
+    }
+
+    if(dataButton.action == 'pointer'){
+
+    }else if(dataButton.action == 'playAuto'){
+
+    }else if(dataButton.action == 'audioEnable'){
+
+    }   
+}
+
+function onclickButtonFrameAction(e){
+    let idFrame = e.currentTarget.getAttribute('data-idFrame');
+    let type = e.currentTarget.getAttribute('data-type');
+    let frameElent = framesElements[idFrame];
+
+    console.log(type);
 }
 
