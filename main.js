@@ -42,7 +42,6 @@ function homeWindow(){
         if(myManuScript){
             myManuScript.close();
         }
-
         myhome = null;
     });
  
