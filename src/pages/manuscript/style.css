@@ -138,6 +138,14 @@ html, body{
     min-height: 100px;
 }
 
+.frame:hover{
+    background-color: #c0c0c040;;
+}
+
+.frame-no-interation{
+    pointer-events: none;
+}
+
 .frame-selected{
     border: solid 2px #a2a1e7ad;
     border-radius: 5px;

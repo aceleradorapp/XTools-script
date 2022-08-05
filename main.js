@@ -36,7 +36,7 @@ function homeWindow(){
     
     myhome = windowNow.create(configHome, 'home',(e)=>{        
         e.show();                           
-    }); 
+    },false); 
 
     myhome.on('closed', ()=>{        
         if(myManuScript){
@@ -58,7 +58,7 @@ function homeWindow(){
         e.show();          
         myManuScript.webContents.send('set-file', file);
         menu.block('Roteiro', false);                         
-    }, true); 
+    }, false); 
 
     myManuScript.on('closed', ()=>{        
         myManuScript = null;
@@ -87,6 +87,6 @@ ipcMain.on('update-file', (event, data)=>{
 });
 
 ipcMain.on('send-position-legend', (event, data)=>{
-    console.log(data.idLegend);   
+    myhome.webContents.send('set-position-legend',data);       
 });
 

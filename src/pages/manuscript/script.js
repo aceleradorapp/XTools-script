@@ -45,7 +45,7 @@ function updateFile(){
 }
 
 function sendPositionLegend(id){
-    ipcRenderer.send('send-position-legend', {idLegend:id});
+    ipcRenderer.send('send-position-legend', id);
 }
 
 function drawScript(){
@@ -73,7 +73,7 @@ function createTagsFrames(data){
         var btInvert = '<button class="btn-config-frame btn-menu btn-color-frame" data-name="btnFrame" data-type="invert" data-idFrame="'+(data.id-1)+'"><i class="fa-solid fa-arrows-rotate"></i></button>' 
     }
     
-    tag +='<div class="frame" data-id-legend = "'+data.id+'">';
+    tag +='<div class="frame frame-no-interation" data-id-legend = "'+data.id+'">';
     tag +='     <div class="buttons-config">';
     tag +='         <div class="btn-config btn-config-frame" data-name="btnFrame" data-type="edit" data-idFrame="'+(data.id-1)+'"><i class="fa-solid fa-pen-to-square"></i></div>';
     tag +='         <div class="btn-config btn-config-frame" data-name="btnFrame" data-type="send" data-idFrame="'+(data.id-1)+'"><i class="fa-solid fa-message"></i></div>';
@@ -129,7 +129,7 @@ function selectLegends(data){
 }
 
 function clickFrameHandler(e){
-    let idElement = e.target.parentElement.getAttribute("data-id-legend");
+    let idElement = parseInt(e.target.parentElement.getAttribute("data-id-legend"));
 
     if(modeSelectFrame){
         sendPositionLegend({idLegend:idElement});
@@ -146,7 +146,7 @@ function onclickButtonsHandler(e){
     if(dataButton.action == 'pointer'){
         modeSelectFrame = !modeSelectFrame;
         if(modeSelectFrame){
-            buttonElement.classList.add('btn-selected');
+            buttonElement.classList.add('btn-selected');            
             addClickFrame();
         }else{
             buttonElement.classList.remove('btn-selected');
@@ -226,7 +226,8 @@ function addClickFrame(){
 
     for(var i=0; i < framesElements.length; i++){
         var element = framesElements[i];
-        element.classList.add('framePoionter');     
+        element.classList.add('framePoionter'); 
+        element.classList.remove('frame-no-interation');    
     }
 }
 
@@ -235,7 +236,8 @@ function removeClickFrame(){
 
     for(var i=0; i < framesElements.length; i++){
         var element = framesElements[i];
-        element.classList.add('framePoionter');     
+        element.classList.remove('framePoionter');  
+        element.classList.add('frame-no-interation');   
     }
 }
 

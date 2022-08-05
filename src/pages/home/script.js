@@ -28,6 +28,11 @@ ipcRenderer.on('set-file', (event, data)=>{
     removeLogin();    
 });
 
+ipcRenderer.on('set-position-legend',(event, data)=>{
+    legends.setPointer(data.idLegend);
+    console.log(data.idLegend);
+});
+
 function removeLogin(){
     contentVideoElement.classList.remove('hide');
     contentLogoElement.classList.add('hide');

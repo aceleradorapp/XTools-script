@@ -30,6 +30,11 @@ class Legends {
         this._writeLegend();
     }
 
+    setPointer(value){
+        this.pointer = value-1;
+        this._writeLegend();
+    }
+
     _writeLegend(){
         this._legendElement.innerHTML = this.data[this.pointer].text;
         this._displayFrameNunberElement.innerHTML = this.data[this.pointer].id;
@@ -79,9 +84,7 @@ class Legends {
         }
 
         this._writeLegend();
-    }
-
-    
+    } 
 }
 
 module.exports = Legends;
