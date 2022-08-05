@@ -73,7 +73,7 @@ function createTagsFrames(data){
         var btInvert = '<button class="btn-config-frame btn-menu btn-color-frame" data-name="btnFrame" data-type="invert" data-idFrame="'+(data.id-1)+'"><i class="fa-solid fa-arrows-rotate"></i></button>' 
     }
     
-    tag +='<div class="frame frame-no-interation" data-id-legend = "'+data.id+'">';
+    tag +='<div class="frame" data-id-legend = "'+data.id+'">';
     tag +='     <div class="buttons-config">';
     tag +='         <div class="btn-config btn-config-frame" data-name="btnFrame" data-type="edit" data-idFrame="'+(data.id-1)+'"><i class="fa-solid fa-pen-to-square"></i></div>';
     tag +='         <div class="btn-config btn-config-frame" data-name="btnFrame" data-type="send" data-idFrame="'+(data.id-1)+'"><i class="fa-solid fa-message"></i></div>';
@@ -141,22 +141,28 @@ function onclickButtonsHandler(e){
         action: e.currentTarget.getAttribute('data-name'),        
     }
 
-    let buttonElement = e.currentTarget;
-
     if(dataButton.action == 'pointer'){
-        modeSelectFrame = !modeSelectFrame;
-        if(modeSelectFrame){
-            buttonElement.classList.add('btn-selected');            
-            addClickFrame();
-        }else{
-            buttonElement.classList.remove('btn-selected');
-            removeClickFrame()
-        }
+        changeButtonPointer();
     }else if(dataButton.action == 'playAuto'){
 
     }else if(dataButton.action == 'audioEnable'){
 
     }   
+}
+
+function changeButtonPointer(block=''){
+    modeSelectFrame = !modeSelectFrame;
+
+    if(block=='block'){
+        modeSelectFrame = false;
+    }
+        if(modeSelectFrame){
+            btnPointerElement.classList.add('btn-selected');            
+            addClickFrame();
+        }else{
+            btnPointerElement.classList.remove('btn-selected');
+            removeClickFrame()
+        }
 }
 
 function onclickButtonFrameAction(e){
@@ -194,6 +200,7 @@ function editText(idFrame){
         selectLegends(file.data[idFrame]);  
 
         updateFile();
+        changeButtonPointer('block');
     }
 
     btCancelElement.onclick = ()=>{
@@ -227,7 +234,7 @@ function addClickFrame(){
     for(var i=0; i < framesElements.length; i++){
         var element = framesElements[i];
         element.classList.add('framePoionter'); 
-        element.classList.remove('frame-no-interation');    
+        //element.classList.remove('frame-no-interation');    
     }
 }
 
@@ -237,7 +244,7 @@ function removeClickFrame(){
     for(var i=0; i < framesElements.length; i++){
         var element = framesElements[i];
         element.classList.remove('framePoionter');  
-        element.classList.add('frame-no-interation');   
+        //element.classList.add('frame-no-interation');   
     }
 }
 

@@ -57,7 +57,7 @@ function homeWindow(){
         e.show();          
         myManuScript.webContents.send('set-file', file);
         menu.block('Roteiro', false);                         
-    }, false); 
+    }, true); 
 
     myManuScript.on('closed', ()=>{        
         myManuScript = null;
