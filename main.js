@@ -1,5 +1,5 @@
 const WindowNow = require('./src/components/WindowNow');
-const { app, ipcMain } = require('electron');
+const { app, ipcMain, net } = require('electron');
 const { configHome, configmanuScript } = require('./src/components/WindowConfig');
 const { menu } = require('./src/components/MenuMaster');
 var { file, openFile } = require('./src/components/Storage');
@@ -36,7 +36,7 @@ function homeWindow(){
     
     myhome = windowNow.create(configHome, 'home',(e)=>{        
         e.show();                           
-    },false); 
+    },true); 
 
     myhome.on('closed', ()=>{        
         if(myManuScript){
@@ -87,5 +87,46 @@ ipcMain.on('update-file', (event, data)=>{
 
 ipcMain.on('send-position-legend', (event, data)=>{
     myhome.webContents.send('set-position-legend',data);       
+});
+
+ipcMain.on('send-request', (event, data)=>{
+
+        
+
+
+
+    var requestOptions = {
+            headers: [
+                ["Content-Type", "application/json"],                
+              ],
+            
+            method: 'POST', 
+            // protocol: 'https:', 
+            url:'https://www.aceleradora.app.br/oauth/token', 
+            credentials: "include",
+            body: JSON.stringify({
+                grant_type : 'password',
+                client_id : 1,
+                client_secret : 'M7vsXadZSuzOKayHxQ5x4XjThQAKimn6FFvO01K9',
+                username : 'andryele@gmail.com',
+                password : '12345678',
+                scope : '',
+            })                     
+            
+          };
+
+    // const request = net.request('https://github.com')
+    const request = net.request(requestOptions)
+    request.on('response', (response) => {
+        console.log(`STATUS: ${response.statusCode}`)
+        console.log(`HEADERS: ${JSON.stringify(response.headers)}`)
+        response.on('data', (chunk) => {
+        console.log(`BODY: ${chunk}`)
+        })
+        response.on('end', () => {
+        console.log('No more data in response.')
+        })
+    })
+    request.end()      
 });
 

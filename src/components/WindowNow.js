@@ -11,8 +11,7 @@ class WindowNow {
     }    
 
     create(config, page, functionComplete, devTools=false){
-        
-        console.log(config.icon);
+                
         let conf = config;
         this._funcComplete = functionComplete;        
 

@@ -31,9 +31,7 @@ ipcRenderer.on('set-file', (event, data)=>{
     
     drawScript();  
     
-    selectLegends({id:1});
-   
-
+    selectLegends({id:1});   
 });
 
 ipcRenderer.on('legend-selected', (event, data)=>{

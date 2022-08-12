@@ -6,7 +6,8 @@ var configHome = {
     webPreferences: {
         nodeIntegration: true,
         contextIsolation: false,
-        nodeIntegrationInWorker: true
+        nodeIntegrationInWorker: true,
+        // enableRemoteModule: true,
     }, 
     backgroundColor: null,        
     frame: true,
