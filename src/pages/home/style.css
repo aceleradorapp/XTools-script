@@ -141,3 +141,25 @@ html, body{
     text-align: center;
 }
 
+.userActive{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.userActive img{
+    border-radius: 50%;
+    border: solid 4px #2164ad;
+}
+
+.userActive h2{
+    color: #fff;;
+}
+
+.userActive span{    
+    color: #fff;
+    margin-bottom: 20px;
+}
+

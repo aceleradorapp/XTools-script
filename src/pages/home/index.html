@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' *.aceleradora.app.br https://aceleradora.app.br https://www.aceleradora.app.br ">
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' *.aceleradora.app.br https://aceleradora.app.br https://www.aceleradora.app.br "> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     
@@ -66,26 +66,32 @@
                 </div>               
             </div>
             <div class="form-login">
-                <form>
+                <form id="formLogin" class=" ">
                     <div class="form-group-title">
                         Acessar o sistema
                     </div>
                     <div class="form-group-login">
                       <label for="exampleInputEmail1">Email </label>
-                      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="E-mail">                      
+                      <input type="email" class="form-control" id="idEmail" aria-describedby="emailHelp" placeholder="E-mail" value="andryele@gmail.com">                      
                     </div>
                     <div class="form-group-login">
                       <label for="exampleInputPassword1">Senha</label>
-                      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Senha">
+                      <input type="password" class="form-control" id="idPassord" placeholder="Senha" value="12345678">
                     </div>                    
-                    <div id="btnLogar" class="btn-menu">Entrar</diva>
-                </form>                
+                    <div id="btnLogar" class="btn-menu">Entrar</div>
+                </form>     
+
+                <div id="userActive" class="userActive hide">
+                    <span>Olá, que bom ter você aqui!</span>
+                    <img src="../../assets/image/images/userTemp.png" alt="">
+                    <h2 id="nameUserLog">Usuário</h2>
+                </div>
             </div>
             <span class="url-ac"><a id="btLink" href="#" target="_blank">www.aceleradora.app.br</a></span>
         </div>               
     </div>
         
-    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script type="text/javascript" src="./script.js"></script>    
 </body>
 </html>
