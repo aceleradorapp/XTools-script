@@ -99,6 +99,26 @@ html, body{
     border-radius: 10px 10px 0 0;
 }
 
+.btn-default{
+    display: inline-block;
+    text-align: center;
+    color: #ffffff9e;
+    padding: 2px 10px;
+    margin-left: 5px;
+    border: solid 2px #ffffff7a;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: Calibri;
+    text-decoration: none;
+    background-color: #c1c1c100;
+    user-select: none;
+}
+
+.btn-default:hover{
+    color: #ffffff;
+    border: solid 2px #fffdfdeb;
+    background-color: #ffffff29;
+}
 
 .btn-menu{
     display: inline-block;
@@ -151,7 +171,7 @@ html, body{
 
 .userActive img{
     border-radius: 50%;
-    border: solid 4px #2164ad;
+    border: solid 5px #2164ad;
 }
 
 .userActive h2{
@@ -161,5 +181,6 @@ html, body{
 .userActive span{    
     color: #fff;
     margin-bottom: 20px;
+    text-align: center;
 }
 

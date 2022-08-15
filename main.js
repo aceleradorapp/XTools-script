@@ -1,4 +1,5 @@
 const WindowNow = require('./src/components/WindowNow');
+const Service = require('./src/services/Service');
 const { app, ipcMain, net } = require('electron');
 const { configHome, configmanuScript } = require('./src/components/WindowConfig');
 const { menu } = require('./src/components/MenuMaster');
@@ -35,7 +36,8 @@ menu.block('all', false);
 function homeWindow(){
     
     myhome = windowNow.create(configHome, 'home',(e)=>{        
-        e.show();                           
+        e.show();  
+        e.webContents.send('init-show', {id:1, clientSecret:'dsdsad'})                                
     },true); 
 
     myhome.on('closed', ()=>{        
@@ -90,8 +92,10 @@ ipcMain.on('send-position-legend', (event, data)=>{
 });
 
 ipcMain.on('authenticated', (event, data)=>{
-    console.log('Autenticação: '+data.status);
-    menu.block('Abrir', true);
-    menu.block('Fechar', true);
+    if(data.status=='ok'){
+        menu.block('Abrir', true);
+        menu.block('Logout', true);
+        menu.block('Fechar', true);
+    }    
 });
 

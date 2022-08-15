@@ -39,16 +39,16 @@ function insert(query, func){
 
 }
 
-async function insertToken(token ,func){
+async function insertToken(token ,func, user_id=1){
     var exist = null;
     const rows = await db.get('SELECT * FROM user_token WHERE id=1', async (err, row)=>{
         exist = row;
-        _createRegistro(exist);
+        _createRegistro(user_id);
     });
 
-    function _createRegistro(){
+    function _createRegistro(user_id){
         if(!exist){
-            db.run(`INSERT INTO user_token(user_id, token) VALUES(?,?)`, [1,token], function(err) {
+            db.run(`INSERT INTO user_token(user_id, token) VALUES(?,?)`, [user_id,token], function(err) {
                 if (err) {
                   return console.log(err.message);
                 }
@@ -56,18 +56,29 @@ async function insertToken(token ,func){
                 func('Insert Success');
               });
         }else{
-            db.run('UPDATE user_token SET token = ? WHERE id = 1',[token]);
+            db.run('UPDATE user_token SET user_id = ?, token = ? WHERE id = 1',[user_id,token]);
             func('Update Success');
         }
         // return this.lastID
-    }
+    }    
+}
+
+function getTokenUser(func){
+    db.get('SELECT * FROM user_token WHERE id=1', (err, row)=>{
+        func(row);
+    });
+}
+
+function removeToken(func){
+    db.run('UPDATE user_token SET user_id = ?, token = ? WHERE id = 1',[null,null]);
+    func('Logout Success');
 }
 
 var dataBase = {
     conect,
-    select,
-    insert,
-    insertToken
+    insertToken,
+    getTokenUser,
+    removeToken
 }
 
 module.exports = {

@@ -70,6 +70,17 @@ const menuObj = [
                             type: 'separator' 
                         },
                         {
+                            id:4,
+                            label:'Logout',
+                            enabled: false,
+                            click(){
+                                clickMenuHandler('Logout');
+                            }
+                        },
+                        { 
+                            type: 'separator' 
+                        },
+                        {
                             id:100,
                             label:'Fechar',
                             role:process.platform === 'darwin' ? 'close' : 'quit'
